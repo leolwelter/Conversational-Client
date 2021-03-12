@@ -1,0 +1,23 @@
+<h1>Welcome to Remesh™</h1>
+<h5>Click one of the conversations below to join in, or create your own below!</h5>
+
+<div>
+  <button (click)="fetchConversations()">Refresh All</button>
+</div>
+<div>
+  <input aria-label="searchField" maxlength="64" placeholder="Search for Topic" #searchField/>
+  <button (click)="searchConversations(searchField.value)">search</button>
+</div>
+
+<div>
+  <input aria-label="titleField" maxlength="64" placeholder="Type your Title Here" #titleField/>
+  <button (click)="createConversation(titleField.value)">Create a Conversation!</button>
+</div>
+
+<ul>
+  <li *ngFor="let conv of conversations">
+    <small (click)="navigateToConversation(conv.id)">
+      ID{{conv.id}}: {{conv.startDate}} - {{conv.title}}
+    </small>
+  </li>
+</ul>

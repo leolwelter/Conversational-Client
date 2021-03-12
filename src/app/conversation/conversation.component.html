@@ -1,0 +1,30 @@
+<h5 *ngIf="conversation">Conversation: {{conversation.id}}, started {{conversation.startDate}}</h5>
+<h5>Topic: {{conversation.title}}</h5>
+<p>Click on a message to view all the thoughts submitted to it</p>
+
+<div>
+  <input id="searchField" aria-label="searchField" maxlength="64" placeholder="Search for text in messages" #searchField/>
+  <button (click)="searchMessages(searchField.value)">search</button>
+  <button (click)="refreshConversation()">refresh all messages</button>
+</div>
+
+<div>
+  <input aria-label="newMessage" [(ngModel)]="newMessage" id="newMessage" maxlength="256" placeholder="Type your message here." />
+  <button (click)="createMessage()">submit</button>
+</div>
+
+<ul *ngIf="messages">
+  <li *ngFor="let message of messages">
+    <small (click)="toggleSelected(message)">ID{{message.id}}: {{message.datetimeSent}} - {{message.text}}</small>
+    <div *ngIf="message === selectedMessage">
+      <ul *ngIf="thoughts.length > 0">
+        <li *ngFor="let thought of thoughts">
+          <small>ID{{thought.id}} {{thought.datetimeSent}}: {{thought.text}}</small>
+        </li>
+      </ul>
+      <h5>What are your thoughts?</h5>
+      <input id="newThoughts" aria-label="newThoughts" maxlength="256" placeholder="Type here" #newThoughts />
+      <button (click)="createThought(newThoughts.value)">submit</button>
+    </div>
+  </li>
+</ul>

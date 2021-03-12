@@ -63,8 +63,8 @@ describe('HomeComponent', () => {
 
     // set up API service mock
     const mockApi = jasmine.createSpyObj('ApiService', ['getAllConversations', 'getConversationsByText']);
-    apiSpy = mockApi.getAllConversations.and.returnValue(of({results: conversationsResponse}));
-    apiSpy = mockApi.getConversationsByText.withArgs('Ave').and.returnValue(of({results: conversationsResponse}));
+    apiSpy = mockApi.getAllConversations.and.returnValue(of(conversationsResponse));
+    apiSpy = mockApi.getConversationsByText.withArgs('Ave').and.returnValue(of(conversationsResponse));
 
     // configure TestBed
     await TestBed.configureTestingModule({

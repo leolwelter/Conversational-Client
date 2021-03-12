@@ -71,11 +71,11 @@ describe('ConversationComponent', () => {
       'getConversation', 'getMessages', 'getThoughts', 'createMessage', 'getMessagesByText', 'createThought'
     ]);
     getConversationSpy = mockApi.getConversation.withArgs(1).and.returnValue(of(conversationResponse));
-    getMessagesSpy = mockApi.getMessages.withArgs(1).and.returnValue(of({results: messagesResponse}));
-    getThoughtsSpy = mockApi.getThoughts.withArgs(1).and.returnValue(of({results: thoughtsResponse}));
+    getMessagesSpy = mockApi.getMessages.withArgs(1).and.returnValue(of(messagesResponse));
+    getThoughtsSpy = mockApi.getThoughts.withArgs(1).and.returnValue(of(thoughtsResponse));
     createMessageSpy = mockApi.createMessage.withArgs('This is a message.', 1).and.returnValue(of(messageResponse));
     createThoughtSpy = mockApi.createThought.withArgs('This is a thought.', 1).and.returnValue(of(thoughtResponse));
-    getMessagesByTextSpy = mockApi.getMessagesByText.withArgs('Ave').and.returnValue(of({results: messagesResponse}));
+    getMessagesByTextSpy = mockApi.getMessagesByText.withArgs('Ave').and.returnValue(of(messagesResponse));
 
     // configure TestBed
     await TestBed.configureTestingModule({

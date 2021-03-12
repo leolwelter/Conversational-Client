@@ -84,7 +84,7 @@ describe('ApiService', () => {
   it('getAllConversations() should return all conversations', () => {
     let result: Conversation[];
     apiService.getAllConversations().subscribe(res => {
-      result = res.results;
+      result = res;
     });
     const req = httpTestingController.expectOne({
       method: 'GET',
@@ -92,7 +92,7 @@ describe('ApiService', () => {
     });
 
     // flush with expected results
-    req.flush({results: [conversation]});
+    req.flush([conversation]);
 
     // @ts-ignore : the result will be assigned by req.flush
     expect(result[0]).toEqual(conversation);
@@ -199,14 +199,14 @@ describe('ApiService', () => {
   it('getMessages() should return all messages', () => {
     let result: Message[];
     apiService.getMessages(conversation.id).subscribe(res => {
-      result = res.results;
+      result = res;
     });
     const req = httpTestingController.expectOne({
       method: 'GET', url: baseUrl + '/messages?cid=' + message.conversation.toString(10)
     });
 
     // flush with expected results
-    req.flush({results: [message]});
+    req.flush([message]);
 
     // @ts-ignore : the result will be assigned by req.flush
     expect(result[0]).toEqual(message);
@@ -243,14 +243,14 @@ describe('ApiService', () => {
   it('getThoughts() should return all thoughts for a given message', () => {
     let result: Thought[];
     apiService.getThoughts(message.id).subscribe(res => {
-      result = res.results;
+      result = res;
     });
     const req = httpTestingController.expectOne({
       method: 'GET', url: baseUrl + '/thoughts?mid=' + message.id.toString(10)
     });
 
     // flush with expected results
-    req.flush({results: [thought]});
+    req.flush([thought]);
 
     // @ts-ignore : the result will be assigned by req.flush
     expect(result[0]).toEqual(thought);

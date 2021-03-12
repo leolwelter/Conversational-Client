@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   fetchConversations(): void {
     this.api.getAllConversations().subscribe(
       next => {
-        this.conversations = next?.results?.map((val: any) => {
+        this.conversations = next?.map((val: any) => {
           return {
             id: val.id,
             title: val.title,
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
     console.log(`searching for ${value} in conversations`);
     this.api.getConversationsByText(value).subscribe(
       next => {
-        this.conversations = next?.results?.map((val: any) => {
+        this.conversations = next?.map((val: any) => {
           return {
             id: val.id,
             title: val.title,

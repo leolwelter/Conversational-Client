@@ -54,7 +54,10 @@ export class ConversationComponent implements OnInit {
     this.thoughts = [];
     this.api.getMessages(cId).subscribe(
       next => {
-        this.messages = next.results.map((val: any) => {
+        if (!next.length || next.length < 1) {
+          return;
+        }
+        this.messages = next.map((val: any) => {
           return {
             conversation: this.conversation.id,
             id: val.id,
@@ -90,8 +93,8 @@ export class ConversationComponent implements OnInit {
     this.thoughts = [];
     this.api.getThoughts(id).subscribe(
       next => {
-        if (next.results) {
-          this.thoughts = next.results.map((val: any) => {
+        if (next) {
+          this.thoughts = next.map((val: any) => {
             return {
               id: val.id,
               text: val.text,
@@ -125,7 +128,7 @@ export class ConversationComponent implements OnInit {
     console.log(`searching for ${value} in messages`);
     this.api.getMessagesByText(value, this.conversation.id).subscribe(
       next => {
-        this.messages = next?.results?.map((val: any) => {
+        this.messages = next?.map((val: any) => {
           return {
             id: val.id,
             text: val.text,
